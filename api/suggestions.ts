@@ -10,6 +10,7 @@ import { join } from 'path';
 // Use same cache location as dish.ts
 const CACHE_DIR = process.env.VERCEL ? '/tmp' : join(process.cwd(), '.cache');
 const CACHE_FILE = join(CACHE_DIR, 'dish-cache.json');
+const SEED_CACHE_FILE = join(process.cwd(), 'api', 'seed-cache.json');
 
 interface CacheEntry {
   data: any;
@@ -20,12 +21,37 @@ interface CacheData {
   [key: string]: CacheEntry;
 }
 
+// Load seed cache from api/seed-cache.json (fallback for empty cache)
+function loadSeedCache(): CacheData {
+  try {
+    if (existsSync(SEED_CACHE_FILE)) {
+      const fileContent = readFileSync(SEED_CACHE_FILE, 'utf-8');
+      return JSON.parse(fileContent);
+    }
+  } catch (error) {
+    console.warn('Failed to load seed cache file for suggestions:', error);
+  }
+  return {};
+}
+
 // Load cache from JSON file
+// If main cache doesn't exist, use seed cache as fallback
 function loadCache(): CacheData {
   try {
+    // First, try to load main cache (local .cache or Vercel /tmp)
     if (existsSync(CACHE_FILE)) {
       const fileContent = readFileSync(CACHE_FILE, 'utf-8');
-      return JSON.parse(fileContent);
+      const cache = JSON.parse(fileContent);
+      // If cache has entries, use it
+      if (Object.keys(cache).length > 0) {
+        return cache;
+      }
+    }
+    
+    // If main cache is empty or doesn't exist, use seed cache
+    const seedCache = loadSeedCache();
+    if (Object.keys(seedCache).length > 0) {
+      return seedCache;
     }
   } catch (error) {
     console.warn('Failed to load cache file for suggestions:', error);
