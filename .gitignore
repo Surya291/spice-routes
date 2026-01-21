@@ -1,2 +1,55 @@
+# Build outputs
+dist/
+build/
+out/
+
+# Node dependencies
+node_modules/
+
+# Vercel and deployment
+.vercel/
 .vercel
-.env 
+
+# Environment files
+.env
+.env.*
+
+# System files
+.DS_Store
+Thumbs.db
+
+# IDE/workspace config
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Cache and temporary files
+.cache/
+.cache/*
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Lock files (optional, if you don't want to commit them)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# Local only or sensitive config
+local.env
+local.*
+*.local
+
+# Others
+*.tgz
+
+# Ignore test coverage output
+coverage/
+
+# Ignore backup files
+*~
+# End of Selection
+```
