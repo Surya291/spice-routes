@@ -1,0 +1,1102 @@
+/**
+ * Minimalistic Hermes Orange Design - IBM Plex Mono
+ * Inspired by WANDERWORD aesthetic
+ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --hermes-orange: #FF6B35;
+  --hermes-orange-light: #FF8C5A;
+  --hermes-orange-dark: #E55A2B;
+  --bg-muted: #F5E6D3;
+  --bg-light: #FAF5EF;
+  --text-black: #000000;
+  --text-white: #FFFFFF;
+  --border-black: #000000;
+  --border-light: #E0D5C7;
+}
+
+
+
+body {
+  font-family: 'IBM Plex Mono', monospace;
+  background: var(--bg-muted);
+  color: var(--text-black);
+  line-height: 1.5;
+  min-height: 100vh;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Prevent iOS text size adjustment */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  /* Prevent horizontal scroll */
+  overflow-x: hidden;
+  width: 100%;
+}
+
+.app-container {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0;
+  min-height: 100vh;
+  /* Prevent horizontal scroll on mobile */
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Top Header */
+.top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 30px;
+  background: var(--bg-light);
+  border-bottom: 2px solid var(--border-black);
+}
+
+.header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.logo {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--text-black);
+  letter-spacing: 0.1em;
+}
+
+.tagline {
+  font-size: 0.9rem;
+  color: var(--text-black);
+  opacity: 0.7;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.search-section {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.search-input {
+  padding: 8px 12px;
+  background: var(--text-white);
+  border: 1px solid var(--border-black);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--text-black);
+  width: 200px;
+  letter-spacing: 0.05em;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--hermes-orange);
+}
+
+.search-input::placeholder {
+  color: #999;
+  opacity: 0.6;
+}
+
+.search-btn {
+  width: 36px;
+  height: 36px;
+  background: var(--text-black);
+  color: var(--text-white);
+  border: 1px solid var(--border-black);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Better touch interaction */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.search-btn:hover:not(:disabled) {
+  background: var(--hermes-orange);
+  border-color: var(--hermes-orange);
+}
+
+.search-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Sample Dishes Carousel */
+.sample-dishes-carousel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+}
+
+.carousel-nav-btn {
+  width: 32px;
+  height: 32px;
+  background: var(--text-white);
+  color: var(--text-black);
+  border: 1px solid var(--border-black);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  line-height: 1;
+  padding: 0;
+}
+
+.carousel-nav-btn:hover:not(:disabled) {
+  background: var(--hermes-orange);
+  color: var(--text-white);
+  border-color: var(--hermes-orange);
+}
+
+.carousel-nav-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.sample-dishes-container {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.sample-dishes {
+  display: flex;
+  gap: 8px;
+  transition: transform 0.3s ease;
+  width: 100%;
+}
+
+.sample-btn {
+  padding: 10px 16px;
+  background: var(--text-white);
+  color: var(--text-black);
+  border: 1px solid var(--border-black);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.05em;
+  flex: 0 0 calc(50% - 4px);
+  min-width: calc(50% - 4px);
+  max-width: calc(50% - 4px);
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  word-wrap: break-word;
+  text-align: center;
+  line-height: 1.3;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Better touch interaction */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.sample-btn:hover {
+  background: var(--hermes-orange);
+  color: var(--text-white);
+  border-color: var(--hermes-orange);
+}
+
+/* API Key Banner */
+.api-key-banner {
+  padding: 8px 30px;
+  background: var(--bg-light);
+  border-bottom: 1px solid var(--border-light);
+  transition: padding 0.2s ease;
+}
+
+.api-key-banner.collapsed {
+  padding: 8px 30px;
+}
+
+.api-key-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.api-key-toggle {
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--text-black);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, background 0.2s;
+  flex-shrink: 0;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.api-key-toggle:hover {
+  background: var(--hermes-orange);
+  color: var(--text-white);
+  border-color: var(--hermes-orange);
+}
+
+.api-key-toggle.collapsed {
+  transform: rotate(-90deg);
+}
+
+.api-key-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-height: 100px;
+  opacity: 1;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.3s ease, margin-top 0.3s ease;
+  margin-top: 8px;
+}
+
+.api-key-banner.collapsed .api-key-section {
+  max-height: 0;
+  opacity: 0;
+  margin-top: 0;
+}
+
+.api-key-header label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-black);
+  letter-spacing: 0.05em;
+  cursor: pointer;
+}
+
+.api-key-input {
+  flex: 1;
+  max-width: 400px;
+  padding: 6px 10px;
+  background: var(--text-white);
+  border: 1px solid var(--border-black);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--text-black);
+  letter-spacing: 0.05em;
+}
+
+.api-key-input:focus {
+  outline: none;
+  border-color: var(--hermes-orange);
+}
+
+.api-key-section small {
+  font-size: 0.7rem;
+  color: #666;
+  opacity: 0.7;
+}
+
+/* Main Content - Two Column Layout */
+.map-and-narration {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 0;
+  min-height: calc(100vh - 140px);
+}
+
+/* ============================================
+   MOBILE RESPONSIVE STYLES
+   ============================================ */
+
+/* Tablet and below (1024px) */
+@media (max-width: 1024px) {
+  .map-and-narration {
+    grid-template-columns: 1fr;
+  }
+  
+  .map-container {
+    border-right: none;
+    border-bottom: 2px solid var(--border-black);
+  }
+  
+  .narration-panel {
+    max-height: none;
+  }
+}
+
+/* Mobile devices (768px and below) */
+@media (max-width: 768px) {
+  .app-container {
+    max-width: 100%;
+  }
+  
+  /* Header - Stack vertically */
+  .top-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px 20px;
+    gap: 16px;
+  }
+  
+  .header-left {
+    width: 100%;
+  }
+  
+  .logo {
+    font-size: 1.4rem;
+  }
+  
+  .tagline {
+    font-size: 0.8rem;
+  }
+  
+  .header-right {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  
+  /* Map controls - Horizontal row, larger buttons */
+  .map-controls {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-start;
+    margin-right: 0;
+    margin-bottom: 0;
+  }
+  
+  .map-control-btn {
+    width: 44px;
+    height: 44px;
+    font-size: 1.1rem;
+    flex: 0 0 auto;
+    /* Better touch target */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Search section - Full width */
+  .search-section {
+    width: 100%;
+    gap: 8px;
+  }
+  
+  .search-input {
+    flex: 1;
+    width: auto;
+    min-width: 0;
+    font-size: 0.9rem;
+    padding: 10px 14px;
+  }
+  
+  .search-btn {
+    width: 44px;
+    height: 44px;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    /* Better touch target */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Sample buttons carousel - Mobile */
+  .sample-dishes-carousel {
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  .carousel-nav-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
+  }
+  
+  .sample-btn {
+    flex: 0 0 calc(50% - 4px);
+    min-width: calc(50% - 4px);
+    max-width: calc(50% - 4px);
+    padding: 10px 14px;
+    font-size: 0.85rem;
+    white-space: normal;
+    word-wrap: break-word;
+    /* Better touch target */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    min-height: 44px;
+  }
+  
+  /* API Key Banner */
+  .api-key-banner {
+    padding: 12px 20px;
+  }
+  
+  .api-key-section {
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+  }
+  
+  .api-key-input {
+    max-width: 100%;
+    font-size: 0.85rem;
+    padding: 10px 12px;
+  }
+  
+  /* Map and Narration */
+  .map-and-narration {
+    min-height: calc(100vh - 200px);
+    width: 100%;
+    overflow-x: hidden;
+  }
+  
+  .map-container {
+    min-height: 400px;
+  }
+  
+  #india-map {
+    min-height: 400px;
+  }
+  
+  /* Narration Panel */
+  .narration-panel {
+    padding: 20px;
+    gap: 16px;
+    max-height: none;
+    overflow: hidden;
+  }
+  
+  .info-box {
+    padding: 14px;
+  }
+  
+  .migration-box {
+    min-height: 250px;
+  }
+  
+  .section-label {
+    font-size: 0.7rem;
+  }
+  
+  .dish-title {
+    font-size: 1.2rem;
+  }
+  
+  .dish-definition {
+    font-size: 0.75rem;
+  }
+  
+  .origin-line {
+    font-size: 0.75rem;
+  }
+  
+  .commentary {
+    font-size: 0.8rem;
+  }
+  
+  .migration-log-item {
+    font-size: 0.75rem;
+  }
+  
+  /* Loading overlay */
+  .loading-overlay {
+    border-right: none;
+    border-bottom: 2px solid var(--border-black);
+  }
+  
+  .loading-overlay p {
+    font-size: 0.8rem;
+  }
+}
+
+/* Small mobile devices (480px and below) */
+@media (max-width: 480px) {
+  .top-header {
+    padding: 12px 16px;
+    gap: 12px;
+  }
+  
+  .logo {
+    font-size: 1.2rem;
+  }
+  
+  .tagline {
+    font-size: 0.75rem;
+  }
+  
+  .map-control-btn,
+  .search-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+  
+  .search-input {
+    font-size: 0.85rem;
+    padding: 8px 12px;
+  }
+  
+  .sample-dishes-carousel {
+    max-width: 100%;
+  }
+  
+  .carousel-nav-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+  }
+  
+  .sample-btn {
+    flex: 0 0 calc(50% - 4px);
+    min-width: calc(50% - 4px);
+    max-width: calc(50% - 4px);
+    font-size: 0.8rem;
+    padding: 10px 12px;
+    white-space: normal;
+    word-wrap: break-word;
+  }
+  
+  .api-key-banner {
+    padding: 8px 16px;
+  }
+  
+  .api-key-header {
+    gap: 6px;
+  }
+  
+  .api-key-toggle {
+    width: 22px;
+    height: 22px;
+    font-size: 0.65rem;
+  }
+  
+  .api-key-input {
+    font-size: 0.8rem;
+    padding: 8px 10px;
+  }
+  
+  .map-container {
+    min-height: 350px;
+  }
+  
+  #india-map {
+    min-height: 350px;
+  }
+  
+  .narration-panel {
+    padding: 16px;
+    gap: 12px;
+    overflow: hidden;
+  }
+  
+  .info-box {
+    padding: 12px;
+  }
+  
+  .migration-box {
+    min-height: 200px;
+  }
+  
+  .dish-title {
+    font-size: 1.1rem;
+  }
+  
+  .section-label {
+    font-size: 0.65rem;
+  }
+  
+  .commentary,
+  .migration-log-item {
+    font-size: 0.7rem;
+  }
+  
+  /* Speech balloon adjustments for small screens */
+  .speech-balloon {
+    transform: scale(0.9);
+  }
+  
+  .balloon-ingredient {
+    font-size: 0.8rem;
+  }
+  
+  .balloon-location {
+    font-size: 0.65rem;
+  }
+}
+
+/* Landscape mobile orientation */
+@media (max-width: 768px) and (orientation: landscape) {
+  .map-container {
+    min-height: 300px;
+  }
+  
+  #india-map {
+    min-height: 300px;
+  }
+  
+  .narration-panel {
+    max-height: calc(100vh - 180px);
+    overflow-y: auto;
+  }
+}
+
+/* Map Container */
+.map-container {
+  position: relative;
+  background: var(--bg-muted);
+  border-right: 2px solid var(--border-black);
+  display: flex;
+  flex-direction: column;
+}
+
+#india-map {
+  width: 100%;
+  height: auto;
+  flex: 1;
+  min-height: 600px;
+  display: block;
+  background: var(--bg-muted);
+  /* Prevent text selection on map */
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-x pan-y pinch-zoom;
+}
+
+/* Map States Styling */
+.states .state {
+  fill: var(--bg-light);
+  stroke: var(--border-light);
+  stroke-width: 0.5;
+  transition: fill 0.3s, stroke 0.3s;
+  cursor: pointer;
+}
+
+.states .state:hover {
+  fill: #FFF5E6;
+  stroke: var(--hermes-orange);
+}
+
+.states .state-highlighted.source {
+  fill: var(--hermes-orange);
+  stroke: var(--hermes-orange-dark);
+  stroke-width: 2;
+  animation: pulse 1s ease-in-out infinite;
+}
+
+.states .state-highlighted.destination {
+  fill: var(--hermes-orange-light);
+  stroke: var(--hermes-orange);
+  stroke-width: 2;
+}
+
+/* District Styles */
+.districts .district {
+  fill: none;
+  stroke: var(--border-light);
+  stroke-width: 0.3;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.districts .district-highlighted.source {
+  fill: var(--hermes-orange);
+  stroke: var(--hermes-orange-dark);
+  stroke-width: 2;
+  opacity: 1;
+  animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.ingredient-path {
+  fill: none;
+  stroke: var(--text-black);
+  stroke-width: 3;
+  stroke-linecap: round;
+  opacity: 0.9;
+}
+
+.ingredient-path.final {
+  opacity: 0.6;
+  stroke-width: 2;
+}
+
+/* Speech Balloon Styles */
+.speech-balloon {
+  pointer-events: none;
+  filter: drop-shadow(4px 4px 0 var(--border-black));
+}
+
+.balloon-bg {
+  fill: var(--text-white);
+  stroke: var(--border-black);
+  stroke-width: 2;
+}
+
+.balloon-tail {
+  fill: var(--text-white);
+  stroke: var(--border-black);
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+
+.balloon-text {
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+.balloon-ingredient {
+  font-size: 0.9rem;
+  font-weight: 600;
+  fill: var(--hermes-orange);
+  letter-spacing: 0.05em;
+}
+
+.balloon-location {
+  font-size: 0.7rem;
+  font-weight: 400;
+  fill: var(--text-black);
+  opacity: 0.8;
+  letter-spacing: 0.02em;
+}
+
+.balloon-comment {
+  font-size: 0.75rem;
+  font-weight: 300;
+  fill: var(--text-black);
+  letter-spacing: 0.02em;
+  word-spacing: 0.1em;
+}
+
+.balloon-comment tspan {
+  dominant-baseline: hanging;
+}
+
+/* Hot Dish Symbol Marker */
+.hot-dish-symbol {
+  pointer-events: none;
+  filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.2));
+}
+
+/* Map Controls - Now in header */
+.map-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-right: 12px;
+}
+
+.map-control-btn {
+  width: 36px;
+  height: 36px;
+  background: var(--text-white);
+  color: var(--text-black);
+  border: 1px solid var(--border-black);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  /* Better touch interaction */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.map-control-btn:hover:not(:disabled) {
+  background: var(--hermes-orange);
+  color: var(--text-white);
+  border-color: var(--hermes-orange);
+}
+
+.map-control-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.speed-controls {
+  display: flex;
+  gap: 4px;
+  margin-left: 8px;
+  padding-left: 8px;
+  border-left: 1px solid var(--border-black);
+}
+
+.speed-btn {
+  padding: 4px 8px;
+  background: var(--text-white);
+  color: var(--text-black);
+  border: 1px solid var(--border-black);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 500;
+}
+
+.speed-btn:hover {
+  background: var(--hermes-orange);
+  color: var(--text-white);
+}
+
+.speed-btn.active {
+  background: var(--text-black);
+  color: var(--text-white);
+}
+
+/* Narration Panel */
+.narration-panel {
+  background: var(--bg-light);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow: hidden;
+  max-height: calc(100vh - 140px);
+  min-height: 0;
+}
+
+/* Info Boxes - White with Black Border */
+.info-box {
+  background: var(--text-white);
+  border: 2px solid var(--border-black);
+  padding: 16px;
+  box-shadow: 2px 2px 0 var(--text-black);
+}
+
+.section-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-black);
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+/* Dish Title Box */
+.dish-title-box {
+  margin-bottom: 4px;
+}
+
+.dish-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-black);
+  margin-bottom: 8px;
+  letter-spacing: 0.05em;
+}
+
+.dish-definition {
+  font-size: 0.75rem;
+  color: var(--text-black);
+  opacity: 0.8;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+}
+
+/* Origin Box */
+.origin-box {
+  margin-bottom: 4px;
+}
+
+.origin-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.origin-line {
+  font-size: 0.8rem;
+  color: var(--text-black);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+/* Narrative Box */
+.narrative-box {
+  flex: 0 0 auto;
+  min-height: 150px;
+  max-height: 240px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.commentary {
+  font-size: 0.85rem;
+  color: var(--text-black);
+  line-height: 1.8;
+  letter-spacing: 0.02em;
+  font-weight: 300;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.commentary .placeholder {
+  color: #999;
+  opacity: 0.6;
+  font-style: italic;
+}
+
+.commentary .error {
+  color: var(--hermes-orange-dark);
+  font-weight: 500;
+}
+
+/* Migration Log Box */
+.migration-box {
+  flex: 1 1 0;
+  min-height: 300px;
+  max-height: none;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.migration-log {
+  font-size: 0.75rem;
+  color: var(--text-black);
+  line-height: 1.8;
+  letter-spacing: 0.02em;
+  font-weight: 300;
+  min-height: 0;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.migration-log .placeholder {
+  color: #999;
+  opacity: 0.6;
+  font-style: italic;
+}
+
+.migration-log-item {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.migration-log-item:last-child {
+  border-bottom: none;
+}
+
+.migration-log-item .ingredient-name {
+  font-weight: 600;
+  color: var(--hermes-orange);
+}
+
+.migration-log-item .route-info {
+  font-size: 0.7rem;
+  opacity: 0.8;
+  margin-top: 4px;
+}
+
+/* Loading Overlay */
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(245, 230, 211, 0.95);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  z-index: 10;
+  border-right: 2px solid var(--border-black);
+}
+
+.loading-overlay.hidden {
+  display: none;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--border-light);
+  border-top-color: var(--hermes-orange);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-overlay p {
+  color: var(--text-black);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+}
+
+/* Scrollbar Styling */
+.migration-box::-webkit-scrollbar,
+.narration-panel::-webkit-scrollbar {
+  width: 6px;
+}
+
+.migration-box::-webkit-scrollbar-track,
+.narration-panel::-webkit-scrollbar-track {
+  background: var(--bg-light);
+}
+
+.migration-box::-webkit-scrollbar-thumb,
+.narration-panel::-webkit-scrollbar-thumb {
+  background: var(--hermes-orange);
+  border-radius: 3px;
+}
+
+.migration-box::-webkit-scrollbar-thumb:hover,
+.narration-panel::-webkit-scrollbar-thumb:hover {
+  background: var(--hermes-orange-dark);
+}

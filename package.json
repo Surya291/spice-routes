@@ -1,0 +1,23 @@
+{
+  "name": "spice-routes",
+  "version": "1.0.0",
+  "description": "Animated storytelling app visualizing how ingredients from different Indian regions converge into dishes",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "dev:api": "vercel dev",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@vercel/node": "^3.0.0",
+    "d3": "^7.8.5",
+    "topojson-client": "^3.0.1"
+  },
+  "devDependencies": {
+    "@types/d3": "^7.4.3",
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.8"
+  }
+}

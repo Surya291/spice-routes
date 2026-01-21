@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>🍲 SPICE.ROUTES — How did half of India end up in this one plate?</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/styles.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="top-header">
+      <div class="header-left">
+        <div class="logo">SPICE.ROUTES</div>
+        <div class="tagline">WHERE.TASTE.TRAVELS.FROM</div>
+      </div>
+      <div class="header-right">
+        <div class="map-controls">
+          <button id="reset-btn" class="map-control-btn" title="Reset">🧹</button>
+          <button id="replay-btn" class="map-control-btn" disabled title="Replay">↻</button>
+          <button id="play-pause-btn" class="map-control-btn" disabled title="Play">▶</button>
+          <button id="skip-btn" class="map-control-btn" disabled title="Skip to End">⏩</button>
+        </div>
+        <div class="search-section">
+          <input type="text" id="dish-input" placeholder="SEARCH_DISH" class="search-input">
+          <button id="cook-btn" class="search-btn">→</button>
+        </div>
+        <div class="sample-dishes-carousel">
+          <button class="carousel-nav-btn carousel-nav-left" id="carousel-left" aria-label="Previous suggestions">‹</button>
+          <div class="sample-dishes-container">
+            <div class="sample-dishes" id="sample-dishes">
+              <!-- Suggestions will be loaded from cache dynamically -->
+            </div>
+          </div>
+          <button class="carousel-nav-btn carousel-nav-right" id="carousel-right" aria-label="Next suggestions">›</button>
+        </div>
+      </div>
+    </header>
+
+
+    <div class="map-and-narration">
+      <div class="map-container">
+        <svg id="india-map" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid meet">
+          <!-- Map paths will be injected here -->
+        </svg>
+        <div id="loading-overlay" class="loading-overlay hidden">
+          <div class="spinner"></div>
+          <p>FETCHING_INGREDIENTS...</p>
+        </div>
+      </div>
+
+      <div class="narration-panel">
+        <div class="info-box dish-title-box">
+          <div id="dish-title" class="dish-title">—</div>
+          <div id="dish-definition" class="dish-definition">/ DEFINITION: —</div>
+        </div>
+
+        <div class="info-box origin-box">
+          <div class="section-label">00_DISH_HQ</div>
+          <div id="origin-info" class="origin-info">
+            <div class="origin-line">DISH: —</div>
+            <div class="origin-line">LOC: —</div>
+            <div class="origin-line">STATE: —</div>
+          </div>
+        </div>
+
+        <!-- Reduced historical narrative box height -->
+        <div class="info-box narrative-box">
+          <div class="section-label">01_THE_STORY</div>
+          <div id="commentary" class="commentary">
+            <p class="placeholder">ENTER_DISH_NAME_TO_BEGIN</p>
+          </div>
+        </div>
+
+        <div class="info-box migration-box">
+          <div class="section-label">02_THE_JOURNEY</div>
+          <div id="migration-log" class="migration-log">
+            <p class="placeholder">INGREDIENT_ROUTES_WILL_APPEAR_HERE</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
