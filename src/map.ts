@@ -3,8 +3,8 @@
  */
 
 import * as d3 from 'd3';
+// @ts-ignore - topojson-client doesn't have type definitions
 import { feature } from 'topojson-client';
-import type { Topology, GeometryCollection } from 'topojson-specification';
 import type { FeatureCollection, Feature } from 'geojson';
 
 export interface StateFeature extends Feature {
@@ -29,6 +29,8 @@ export interface DistrictFeature extends Feature {
     st_nm?: string;
     st_code?: string;
     id?: string;
+    district?: string; // Alternative property name in some TopoJSON files
+    name?: string; // Alternative property name
   };
 }
 
@@ -40,7 +42,6 @@ export interface DistrictMetadata {
   centroid: [number, number];
 }
 
-let indiaTopology: Topology | null = null;
 let stateFeatures: StateFeature[] = [];
 let districtFeatures: DistrictFeature[] = [];
 let stateMetadataMap: Map<string, StateMetadata> = new Map();
@@ -55,16 +56,18 @@ let pathGenerator: d3.GeoPath | null = null;
 export async function loadIndiaMap(): Promise<void> {
   try {
     const response = await fetch('/india.json');
-    const topology = await response.json() as Topology;
-    indiaTopology = topology;
+    // @ts-ignore - TopoJSON types are complex, using any for topology
+    const topology: any = await response.json();
 
     // Extract state features from the topology
-    const statesCollection = topology.objects.states as GeometryCollection;
+    // @ts-ignore - TopoJSON types
+    const statesCollection = topology.objects.states;
     const features = feature(topology, statesCollection) as FeatureCollection;
     stateFeatures = features.features as StateFeature[];
 
     // Extract district features from the topology
-    const districtsCollection = topology.objects.districts as GeometryCollection;
+    // @ts-ignore - TopoJSON types
+    const districtsCollection = topology.objects.districts;
     if (districtsCollection) {
       const districtFeaturesCollection = feature(topology, districtsCollection) as FeatureCollection;
       districtFeatures = districtFeaturesCollection.features as DistrictFeature[];
@@ -72,7 +75,6 @@ export async function loadIndiaMap(): Promise<void> {
 
     // Set up projection - using geoIdentity since TopoJSON might already be projected
     // If not, we'll use a suitable projection for India
-    const bounds = d3.geoBounds(features);
     const width = 1000;
     const height = 1000;
     
@@ -186,9 +188,9 @@ export function renderMap(svgElement: SVGSVGElement): void {
   svg.select('.map-group').selectAll('*').remove();
   
   // Get or create map group (for zooming)
-  let mapGroup = svg.select('.map-group');
+  let mapGroup: d3.Selection<SVGGElement, unknown, null, undefined> = svg.select<SVGGElement>('.map-group');
   if (mapGroup.empty()) {
-    mapGroup = svg.append('g').attr('class', 'map-group');
+    mapGroup = svg.append<SVGGElement>('g').attr('class', 'map-group');
   }
 
   // Add a group for state paths inside map-group
@@ -246,14 +248,14 @@ export function getStateMetadata(stateId: string): StateMetadata | undefined {
 export function findStateByName(stateName: string): StateMetadata | undefined {
   const normalized = normalizeStateName(stateName);
   
-  for (const [id, metadata] of stateMetadataMap.entries()) {
+  for (const [, metadata] of stateMetadataMap.entries()) {
     if (normalizeStateName(metadata.name) === normalized) {
       return metadata;
     }
   }
   
   // Try fuzzy matching
-  for (const [id, metadata] of stateMetadataMap.entries()) {
+  for (const [, metadata] of stateMetadataMap.entries()) {
     const metaName = normalizeStateName(metadata.name);
     if (metaName.includes(normalized) || normalized.includes(metaName)) {
       return metadata;

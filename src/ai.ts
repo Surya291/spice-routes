@@ -45,7 +45,7 @@ export async function fetchDishIngredients(
     throw new Error('Gemini API key is required');
   }
 
-  const prompt = buildPrompt(query);
+  const prompt = buildPrompt(query.name);
 
   // Print len of prompt being sent
   // Note: JavaScript strings' .length counts UTF-16 code units, not tokens, but for debugging we use .length

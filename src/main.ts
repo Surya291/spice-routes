@@ -15,6 +15,7 @@ import {
   getAnimationState,
   resetEverything,
 } from './animation';
+import type { DishStory } from './domain';
 
 // DOM elements
 let dishInput: HTMLInputElement;
@@ -48,7 +49,11 @@ async function init() {
   dishDefinitionElement = document.getElementById('dish-definition') as HTMLElement;
   originInfoElement = document.getElementById('origin-info') as HTMLElement;
   migrationLogElement = document.getElementById('migration-log') as HTMLElement;
-  mapSvg = document.getElementById('india-map') as SVGSVGElement;
+  const mapElement = document.getElementById('india-map');
+  if (!mapElement || !(mapElement instanceof SVGSVGElement)) {
+    throw new Error('India map SVG element not found');
+  }
+  mapSvg = mapElement;
 
   // Load India map
   try {
@@ -285,7 +290,7 @@ function updateDishInfo(story: DishStory) {
 
   // Update migration log
   migrationLogElement.innerHTML = story.ingredients
-    .map((ing, idx) => {
+    .map((ing: { ingredientName: string; placeLabel: string; stateName: string }, idx: number) => {
       return `
         <div class="migration-log-item">
           <div class="ingredient-name">${idx.toString().padStart(2, '0')}_${ing.ingredientName.toUpperCase()}</div>
