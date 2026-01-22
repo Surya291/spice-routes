@@ -14,6 +14,7 @@ import {
   skipToEnd,
   getAnimationState,
   resetEverything,
+  getCurrentStory,
 } from './animation';
 import type { DishStory } from './domain';
 
@@ -24,6 +25,7 @@ let playPauseBtn: HTMLButtonElement;
 let replayBtn: HTMLButtonElement;
 let skipBtn: HTMLButtonElement;
 let resetBtn: HTMLButtonElement;
+let shareBtn: HTMLButtonElement;
 let loadingOverlay: HTMLElement;
 let commentaryElement: HTMLElement;
 let dishTitleElement: HTMLElement;
@@ -43,6 +45,7 @@ async function init() {
   replayBtn = document.getElementById('replay-btn') as HTMLButtonElement;
   skipBtn = document.getElementById('skip-btn') as HTMLButtonElement;
   resetBtn = document.getElementById('reset-btn') as HTMLButtonElement;
+  shareBtn = document.getElementById('share-btn') as HTMLButtonElement;
   loadingOverlay = document.getElementById('loading-overlay') as HTMLElement;
   commentaryElement = document.getElementById('commentary') as HTMLElement;
   dishTitleElement = document.getElementById('dish-title') as HTMLElement;
@@ -76,6 +79,7 @@ async function init() {
   playPauseBtn.addEventListener('click', handlePlayPause);
   replayBtn.addEventListener('click', handleReplay);
   skipBtn.addEventListener('click', handleSkip);
+  shareBtn.addEventListener('click', handleShare);
   resetBtn.addEventListener('click', handleReset);
 
   // Sample dish buttons are now loaded dynamically from backend
@@ -223,6 +227,7 @@ function resetUI() {
   playPauseBtn.disabled = true;
   replayBtn.disabled = true;
   skipBtn.disabled = true;
+  shareBtn.disabled = true;
   updatePlayPauseButton();
 }
 
@@ -268,6 +273,7 @@ async function handleCookClick() {
   playPauseBtn.disabled = false;
   replayBtn.disabled = false;
   skipBtn.disabled = false;
+  shareBtn.disabled = false;
   updatePlayPauseButton();
   } catch (error) {
     console.error('Error fetching ingredients:', error);
@@ -311,6 +317,203 @@ function handleReplay() {
 function handleSkip() {
   skipToEnd();
   updatePlayPauseButton();
+}
+
+/**
+ * Handle share button - capture map and share via WhatsApp
+ */
+async function handleShare() {
+  const story = getCurrentStory();
+  if (!story) {
+    showError('NO_STORY_TO_SHARE');
+    return;
+  }
+
+  try {
+    // Ensure final view is shown (all routes visible)
+    skipToEnd();
+    
+    // Wait for final view to render
+    await new Promise(resolve => setTimeout(resolve, 500));
+
+    // Hide dish title temporarily for screenshot
+    const originalTitle = dishTitleElement.textContent;
+    const originalDefinition = dishDefinitionElement.textContent;
+    dishTitleElement.textContent = '?';
+    dishDefinitionElement.textContent = '/ DEFINITION: —';
+
+    // Wait a moment for UI to update
+    await new Promise(resolve => setTimeout(resolve, 100));
+
+    // Capture map as image (returns blob)
+    const imageBlob = await captureMapAsImageBlob();
+
+    // Restore title
+    dishTitleElement.textContent = originalTitle;
+    dishDefinitionElement.textContent = originalDefinition;
+
+    // Generate challenge message
+    const message = generateShareMessage(story);
+
+    // Share via Web Share API (no download)
+    shareToWhatsApp(message, imageBlob);
+  } catch (error) {
+    console.error('Error sharing:', error);
+    showError('SHARE_FAILED');
+    // Restore title in case of error
+    const story = getCurrentStory();
+    if (story) {
+      dishTitleElement.textContent = story.dish.toUpperCase();
+      dishDefinitionElement.textContent = `/ DEFINITION: A DISH FROM ${story.originCity.toUpperCase()}, ${story.originState.toUpperCase()}`;
+    }
+  }
+}
+
+/**
+ * Capture map container as image blob using html2canvas
+ * This captures everything as rendered including all routes, highlights, etc.
+ */
+async function captureMapAsImageBlob(): Promise<Blob> {
+  // Dynamically import html2canvas
+  const html2canvas = (await import('html2canvas')).default;
+  
+  // Get map container
+  const mapContainer = document.querySelector('.map-container') as HTMLElement;
+  if (!mapContainer) {
+    throw new Error('Map container not found');
+  }
+  
+  // Temporarily hide UI elements that shouldn't be in capture
+  const speechBalloons = mapContainer.querySelectorAll('.speech-balloon');
+  const loadingOverlay = mapContainer.querySelector('.loading-overlay');
+  const infoPanelToggle = document.querySelector('.info-panel-toggle') as HTMLElement;
+  const originalStyles: Array<{ element: HTMLElement; display: string }> = [];
+  
+  // Hide speech balloons
+  speechBalloons.forEach((el) => {
+    const htmlEl = el as HTMLElement;
+    originalStyles.push({ element: htmlEl, display: htmlEl.style.display });
+    htmlEl.style.display = 'none';
+  });
+  
+  // Hide loading overlay
+  if (loadingOverlay) {
+    const htmlEl = loadingOverlay as HTMLElement;
+    originalStyles.push({ element: htmlEl, display: htmlEl.style.display });
+    htmlEl.style.display = 'none';
+  }
+  
+  // Hide info panel toggle button
+  if (infoPanelToggle) {
+    originalStyles.push({ element: infoPanelToggle, display: infoPanelToggle.style.display });
+    infoPanelToggle.style.display = 'none';
+  }
+  
+  try {
+    // Capture the map container as canvas
+    const canvas = await html2canvas(mapContainer, {
+      backgroundColor: '#F5E6D3',
+      scale: 2, // Higher quality
+      logging: false,
+      useCORS: true,
+    });
+    
+    // Restore hidden elements
+    originalStyles.forEach(({ element, display }) => {
+      element.style.display = display;
+    });
+    
+    // Convert canvas to blob
+    return new Promise((resolve, reject) => {
+      canvas.toBlob((blob) => {
+        if (blob) {
+          resolve(blob);
+        } else {
+          reject(new Error('Failed to create image blob'));
+        }
+      }, 'image/png', 0.95);
+    });
+  } catch (error) {
+    // Restore hidden elements on error
+    originalStyles.forEach(({ element, display }) => {
+      element.style.display = display;
+    });
+    throw error;
+  }
+}
+
+/**
+ * Generate share message in app's design style
+ */
+function generateShareMessage(story: DishStory): string {
+  // Build ingredient list
+  const ingredientLines = story.ingredients
+    .slice(0, 5) // Limit to 5 ingredients for readability
+    .map(ing => {
+      const ingredientName = ing.ingredientName.toUpperCase();
+      const place = ing.placeLabel.toUpperCase();
+      const state = ing.stateName.toUpperCase();
+      return `${ingredientName} FROM ${place}, ${state}`;
+    })
+    .join('\n');
+
+  // Get destination state
+  const destination = story.originState.toUpperCase();
+
+  return `SPICE ROUTE MYSTERY
+
+CAN YOU GUESS THIS DISH?
+
+INGREDIENTS JOURNEY:
+${ingredientLines}
+
+ALL ROADS LEAD TO: ${destination}
+
+WHAT DISH IS THIS?
+
+GUESS AND REPLY!
+
+MADE WITH SPICE.ROUTES`;
+}
+
+/**
+ * Share to WhatsApp with image and message using Web Share API
+ */
+function shareToWhatsApp(message: string, imageBlob: Blob) {
+  // Create File object for Web Share API
+  const file = new File([imageBlob], 'spice-route-mystery.png', { type: 'image/png' });
+  
+  // Check if Web Share API supports files
+  if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+    // Use Web Share API with image and text (no download needed)
+    navigator.share({
+      title: 'SPICE ROUTE MYSTERY',
+      text: message,
+      files: [file],
+    }).catch(err => {
+      if (err.name !== 'AbortError') {
+        console.error('Share failed:', err);
+        // Fallback to WhatsApp web (text only)
+        openWhatsAppWeb(message);
+      }
+    });
+  } else {
+    // Fallback: Open WhatsApp web with text
+    // User can manually attach image if they want
+    openWhatsAppWeb(message);
+  }
+}
+
+/**
+ * Open WhatsApp Web with message
+ */
+function openWhatsAppWeb(message: string) {
+  // Encode message for URL
+  const encodedMessage = encodeURIComponent(message);
+  const whatsappUrl = `https://wa.me/?text=${encodedMessage}`;
+  
+  // Open in new window
+  window.open(whatsappUrl, '_blank');
 }
 
 /**

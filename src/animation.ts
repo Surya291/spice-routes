@@ -858,6 +858,13 @@ export function getAnimationState(): AnimationState {
 }
 
 /**
+ * Get current story for sharing
+ */
+export function getCurrentStory(): DishStory | null {
+  return context.story;
+}
+
+/**
  * Get animation context (for debugging)
  */
 export function getAnimationContext(): AnimationContext {
