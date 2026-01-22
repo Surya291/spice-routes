@@ -68,7 +68,8 @@ export function initAnimation(
       if (mapGroup) {
         mapGroup.attr('transform', event.transform.toString());
       }
-      // Update speech balloon positions
+      // Update speech balloon positions during zoom
+      // This ensures the balloon tracks the zoomed location in real-time
       if (speechBalloonGroup) {
         speechBalloonGroup.selectAll<SVGGElement, unknown>('.speech-balloon').each(function() {
           const balloon = d3.select<SVGGElement, unknown>(this);
@@ -78,6 +79,20 @@ export function initAnimation(
     });
 
   d3Svg.call(zoomBehavior);
+  
+  // Update balloon position on window resize (for mobile/desktop switching)
+  let resizeTimeout: number;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = window.setTimeout(() => {
+      if (speechBalloonGroup) {
+        speechBalloonGroup.selectAll<SVGGElement, unknown>('.speech-balloon').each(function() {
+          const balloon = d3.select<SVGGElement, unknown>(this);
+          updateSpeechBalloonPosition(balloon);
+        });
+      }
+    }, 100);
+  });
 }
 
 /**
@@ -283,7 +298,8 @@ function startFrame(frame: StoryFrame, _elapsed: number): void {
       // Zoom in to source (district or state)
       zoomToState(fromCentroid);
       
-      // Show speech balloon with typing animation (after zoom starts)
+      // Show speech balloon after zoom animation completes (800ms zoom duration)
+      // Also update position during zoom to keep it aligned
       setTimeout(() => {
         showSpeechBalloon(
           fromCentroid!,
@@ -291,7 +307,17 @@ function startFrame(frame: StoryFrame, _elapsed: number): void {
           frame.ingredient.placeLabel,
           frame.ingredient.stateName
         );
-      }, 200);
+        // Update position multiple times during zoom to ensure it stays aligned
+        const updateInterval = setInterval(() => {
+          if (speechBalloonGroup) {
+            speechBalloonGroup.selectAll<SVGGElement, unknown>('.speech-balloon').each(function() {
+              updateSpeechBalloonPosition(d3.select<SVGGElement, unknown>(this));
+            });
+          }
+        }, 50);
+        // Stop updating after zoom completes
+        setTimeout(() => clearInterval(updateInterval), 900);
+      }, 850); // Show after zoom completes
     }
 
     // Highlight district if available, otherwise highlight state
@@ -593,24 +619,32 @@ function showSpeechBalloon(
   hideSpeechBalloon();
 
   const [x, y] = position;
-  const padding = 14;
-  const tailHeight = 15;
-  const lineHeight = 22;
+  
+  // Detect mobile viewport for larger sizing
+  const isMobile = window.innerWidth <= 768;
+  
+  // Larger padding and sizing on mobile for better visibility
+  const padding = isMobile ? 18 : 14;
+  const tailHeight = isMobile ? 18 : 15;
+  const lineHeight = isMobile ? 26 : 22;
   
   // Calculate dynamic width based on text length
   const ingredientTextStr = ingredient.toUpperCase();
   const locationText = `${place.toUpperCase()}, ${state.toUpperCase()}`;
   
-  // Estimate width: ~7px per character for monospace at 0.9rem
-  const ingredientWidth = ingredientTextStr.length * 7;
-  const locationWidth = locationText.length * 7;
+  // Estimate width: ~7px per character for monospace (larger on mobile)
+  const charWidth = isMobile ? 8.5 : 7;
+  const ingredientWidth = ingredientTextStr.length * charWidth;
+  const locationWidth = locationText.length * charWidth;
   const maxTextWidth = Math.max(ingredientWidth, locationWidth);
   
-  // Dynamic width: content + padding, with min/max bounds
-  const balloonWidth = Math.max(180, Math.min(320, maxTextWidth + padding * 2));
+  // Dynamic width: content + padding, with min/max bounds (larger on mobile)
+  const minWidth = isMobile ? 240 : 180;
+  const maxWidth = isMobile ? 400 : 320;
+  const balloonWidth = Math.max(minWidth, Math.min(maxWidth, maxTextWidth + padding * 2));
   
   // Dynamic height: calculate based on whether ingredient needs wrapping
-  const needsWrapping = ingredientTextStr.length > 35;
+  const needsWrapping = ingredientTextStr.length > (isMobile ? 40 : 35);
   const balloonHeight = padding * 2 + lineHeight * (needsWrapping ? 3 : 2) + 8;
 
   // Create speech balloon group
@@ -624,8 +658,18 @@ function showSpeechBalloon(
     .attr('data-w', balloonWidth.toString())
     .attr('opacity', 0);
   
-  // Update position based on current zoom
+  // Update position immediately and multiple times to ensure correct positioning
+  // This handles timing issues with zoom animations
   updateSpeechBalloonPosition(balloon);
+  
+  requestAnimationFrame(() => {
+    updateSpeechBalloonPosition(balloon);
+  });
+  
+  // Update again after zoom animation completes (800ms + buffer)
+  setTimeout(() => {
+    updateSpeechBalloonPosition(balloon);
+  }, 900);
 
   // Background rectangle with rounded corners
   balloon
@@ -716,11 +760,13 @@ function showSpeechBalloon(
 
 /**
  * Update speech balloon position based on current zoom transform
+ * The balloon is outside map-group, so we need to manually apply the same transform
+ * Handles mobile viewport scaling correctly
  */
 function updateSpeechBalloonPosition(
   balloon: d3.Selection<SVGGElement, unknown, null, undefined>
 ): void {
-  if (!svgElement) return;
+  if (!svgElement || !mapGroup) return;
   
   const xAttr = balloon.attr('data-x');
   const yAttr = balloon.attr('data-y');
@@ -728,16 +774,50 @@ function updateSpeechBalloonPosition(
   
   const x = parseFloat(xAttr);
   const y = parseFloat(yAttr);
-  const currentTransform = d3.zoomTransform(svgElement);
-  const transformedX = currentTransform.applyX(x);
-  const transformedY = currentTransform.applyY(y);
+  
+  // Detect mobile viewport (width <= 768px)
+  const isMobile = window.innerWidth <= 768;
+  
+  // Get viewBox dimensions
+  const viewBox = svgElement.viewBox.baseVal;
+  const viewBoxWidth = viewBox.width || 1000;
+  const viewBoxHeight = viewBox.height || 1000;
+  
   const hAttr = balloon.attr('data-h');
   const balloonHeight = hAttr ? parseFloat(hAttr) : 86;
   const wAttr = balloon.attr('data-w');
   const balloonWidth = wAttr ? parseFloat(wAttr) : 240;
   
-  // Center the balloon horizontally on the point
-  balloon.attr('transform', `translate(${transformedX - balloonWidth / 2}, ${transformedY - balloonHeight - 40})`);
+  let offsetX: number;
+  let offsetY: number;
+  
+  if (isMobile) {
+    // MOBILE: Position at top-middle, regardless of point location
+    // Center horizontally, position near top
+    offsetX = (viewBoxWidth - balloonWidth) / 2; // Center horizontally
+    offsetY = 40; // Position near top with margin
+  } else {
+    // DESKTOP: Position relative to the zoomed point (current behavior)
+    const currentTransform = d3.zoomTransform(svgElement);
+    const k = currentTransform.k;
+    const tx = currentTransform.x;
+    const ty = currentTransform.y;
+    
+    const transformedX = x * k + tx;
+    const transformedY = y * k + ty;
+    
+    // Center the balloon horizontally on the point
+    // Position it above the point with offset
+    offsetX = transformedX - balloonWidth / 2;
+    offsetY = transformedY - balloonHeight - 40;
+    
+    // Clamp to viewBox bounds for desktop
+    const margin = 20;
+    offsetX = Math.max(margin, Math.min(offsetX, viewBoxWidth - balloonWidth - margin));
+    offsetY = Math.max(margin, Math.min(offsetY, viewBoxHeight - balloonHeight - margin));
+  }
+  
+  balloon.attr('transform', `translate(${offsetX}, ${offsetY})`);
 }
 
 /**

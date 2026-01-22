@@ -332,10 +332,10 @@ body {
 
 /* Main Content - Two Column Layout */
 .map-and-narration {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 0;
+  position: relative;
+  display: flex;
   min-height: calc(100vh - 140px);
+  width: 100%;
 }
 
 /* ============================================
@@ -344,17 +344,16 @@ body {
 
 /* Tablet and below (1024px) */
 @media (max-width: 1024px) {
-  .map-and-narration {
-    grid-template-columns: 1fr;
-  }
-  
-  .map-container {
-    border-right: none;
-    border-bottom: 2px solid var(--border-black);
-  }
-  
   .narration-panel {
-    max-height: none;
+    width: 380px;
+  }
+  
+  .info-panel-toggle {
+    display: flex;
+  }
+  
+  .narration-panel:not(.collapsed) ~ .map-container .info-panel-toggle {
+    display: none;
   }
 }
 
@@ -486,18 +485,40 @@ body {
   
   .map-container {
     min-height: 400px;
+    width: 100%;
   }
   
   #india-map {
     min-height: 400px;
   }
   
-  /* Narration Panel */
+  /* Info Panel Toggle - Mobile */
+  .info-panel-toggle {
+    right: 16px;
+    width: 44px;
+    height: 44px;
+    font-size: 1.3rem;
+    display: flex;
+  }
+  
+  /* Narration Panel - Mobile */
   .narration-panel {
+    width: 85vw;
+    max-width: 400px;
+  }
+  
+  .info-panel-content {
     padding: 20px;
+    padding-top: 56px;
     gap: 16px;
-    max-height: none;
-    overflow: hidden;
+  }
+  
+  .info-panel-close {
+    top: 12px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+    font-size: 1.6rem;
   }
   
   .info-box {
@@ -644,17 +665,18 @@ body {
     font-size: 0.7rem;
   }
   
-  /* Speech balloon adjustments for small screens */
+  /* Speech balloon adjustments for mobile - make it larger and more visible */
   .speech-balloon {
-    transform: scale(0.9);
+    /* No scaling down - let JS handle sizing */
   }
   
   .balloon-ingredient {
-    font-size: 0.8rem;
+    font-size: 1rem !important; /* Larger on mobile */
+    font-weight: 600;
   }
   
   .balloon-location {
-    font-size: 0.65rem;
+    font-size: 0.85rem !important; /* Larger on mobile */
   }
 }
 
@@ -678,9 +700,11 @@ body {
 .map-container {
   position: relative;
   background: var(--bg-muted);
-  border-right: 2px solid var(--border-black);
   display: flex;
   flex-direction: column;
+  flex: 1;
+  width: 100%;
+  min-width: 0;
 }
 
 #india-map {
@@ -800,6 +824,21 @@ body {
   letter-spacing: 0.02em;
 }
 
+/* Mobile: Larger balloon text for better visibility */
+@media (max-width: 768px) {
+  .balloon-ingredient {
+    font-size: 1.1rem !important;
+  }
+  
+  .balloon-location {
+    font-size: 0.9rem !important;
+  }
+  
+  .balloon-bg {
+    stroke-width: 2.5; /* Thicker border on mobile */
+  }
+}
+
 .balloon-comment {
   font-size: 0.75rem;
   font-weight: 300;
@@ -887,15 +926,141 @@ body {
 }
 
 /* Narration Panel */
+/* Info Panel Toggle Button (shown when collapsed) */
+.info-panel-toggle {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1001;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--hermes-orange);
+  border: 2px solid var(--border-black);
+  color: var(--text-white);
+  font-size: 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: none; /* Hidden by default, shown when panel is collapsed */
+  align-items: center;
+  justify-content: center;
+  box-shadow: 2px 2px 0 var(--text-black);
+  transition: all 0.2s ease;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Show toggle button when panel is collapsed on mobile/tablet */
+@media (max-width: 1024px) {
+  .map-container .info-panel-toggle.show {
+    display: flex;
+  }
+}
+
+.info-panel-toggle:hover {
+  background: var(--hermes-orange-dark);
+  transform: translateY(-50%) scale(1.05);
+}
+
+.info-panel-toggle:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.info-panel-toggle.show {
+  display: flex;
+}
+
+.toggle-icon {
+  line-height: 1;
+}
+
+/* Info Panel Close Button */
+.info-panel-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  border: 2px solid var(--border-black);
+  background: var(--text-white);
+  color: var(--text-black);
+  font-size: 1.8rem;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: all 0.2s ease;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.info-panel-close:hover {
+  background: var(--hermes-orange);
+  color: var(--text-white);
+}
+
+.info-panel-close:active {
+  transform: scale(0.9);
+}
+
 .narration-panel {
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 400px;
+  max-width: 90vw;
   background: var(--bg-light);
+  border-left: 2px solid var(--border-black);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  box-shadow: -4px 0 12px rgba(0, 0, 0, 0.1);
+  transform: translateX(0);
+  transition: transform 0.3s ease;
+  overflow: hidden;
+}
+
+/* Desktop: always visible, not fixed */
+@media (min-width: 1025px) {
+  .narration-panel {
+    position: relative;
+    width: 400px;
+    flex-shrink: 0;
+    transform: none;
+    box-shadow: none;
+  }
+  
+  .map-container {
+    border-right: 2px solid var(--border-black);
+  }
+}
+
+.narration-panel.collapsed {
+  transform: translateX(100%);
+}
+
+@media (min-width: 1025px) {
+  .narration-panel.collapsed {
+    transform: none;
+  }
+}
+
+.info-panel-content {
   padding: 30px;
+  padding-top: 60px; /* Space for close button */
   display: flex;
   flex-direction: column;
   gap: 20px;
-  overflow: hidden;
-  max-height: calc(100vh - 140px);
-  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Info Boxes - White with Black Border */
