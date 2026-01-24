@@ -97,6 +97,58 @@ async function init() {
       initCarousel();
     }, 300);
   });
+
+  // Initialize info panel toggle functionality
+  initInfoPanelToggle();
+}
+
+/**
+ * Initialize info panel toggle (collapsible on mobile/tablet)
+ */
+function initInfoPanelToggle() {
+  const infoPanel = document.getElementById('narration-panel');
+  const toggleBtn = document.getElementById('info-panel-toggle');
+  const closeBtn = document.getElementById('info-panel-close');
+  
+  if (!infoPanel || !toggleBtn || !closeBtn) return;
+
+  // Check if mobile/tablet (viewport width <= 1024px)
+  const isMobile = window.matchMedia('(max-width: 1024px)').matches;
+  
+  // Start collapsed on mobile
+  if (isMobile) {
+    infoPanel.classList.add('collapsed');
+    toggleBtn.classList.add('show');
+  }
+
+  // Toggle button (opens panel)
+  toggleBtn.addEventListener('click', () => {
+    infoPanel.classList.remove('collapsed');
+    toggleBtn.classList.remove('show');
+  });
+
+  // Close button (closes panel)
+  closeBtn.addEventListener('click', () => {
+    infoPanel.classList.add('collapsed');
+    if (isMobile) {
+      toggleBtn.classList.add('show');
+    }
+  });
+
+  // Handle window resize
+  window.addEventListener('resize', () => {
+    const isMobileNow = window.matchMedia('(max-width: 1024px)').matches;
+    if (!isMobileNow) {
+      // Desktop: always show panel
+      infoPanel.classList.remove('collapsed');
+      toggleBtn.classList.remove('show');
+    } else {
+      // Mobile: show toggle if panel is collapsed
+      if (infoPanel.classList.contains('collapsed')) {
+        toggleBtn.classList.add('show');
+      }
+    }
+  });
 }
 
 /**

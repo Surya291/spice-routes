@@ -1,112 +1,232 @@
-# How did half of India end up in this one plate?
+# 🍲 SPICE.ROUTES
 
-An animated storytelling web app that visualizes how ingredients from different Indian regions converge into a single dish.
+**WHERE.TASTE.TRAVELS.FROM**
 
-## Overview
+![SPICE.ROUTES Cover](media/cover_img.png)
 
-This app takes a dish name, uses AI (Gemini Flash) to identify its key ingredients and their Indian state origins, and animates an SVG map showing those ingredients "travelling" from their source regions to the dish's origin city—with playful, sarcastic commentary.
+> *How did half of India end up in this one plate?*
 
-## Features
+An animated storytelling web app that visualizes how ingredients from different Indian regions converge into a single dish. Watch as spices, grains, and flavors journey across the map to tell the geographic story behind your favorite Indian dishes.
 
-- **State-level visualization**: Clean SVG map of India with state boundaries
-- **Animated ingredient flows**: Curved paths showing ingredients converging to the dish origin
-- **AI-powered ingredient inference**: Uses Gemini Flash API to identify ingredients and their regions
-- **Playful commentary**: Witty, fast-paced narration in the style of "history of the entire world, i guess"
-- **Interactive controls**: Play, pause, replay, and skip to final view
+---
 
-## Setup
+## ✨ What It Does
+
+Enter a dish name. Watch the magic unfold:
+
+1. **AI identifies** the key ingredients (5-10 meaningful ones, no water-from-Ganges nonsense)
+2. **Maps each ingredient** to its geographic origin (district-level precision!)
+3. **Animates the journey** as ingredients "travel" from source regions to the dish's origin
+4. **Tells the story** with witty, Bill Wurtz-style commentary
+
+The result? A beautiful, educational visualization that answers: *"How did half of India end up in this one plate?"*
+
+---
+
+## 🎯 Features
+
+- **🗺️ District-Level Visualization**: Precise geographic mapping with district highlights
+- **🎬 Smooth Animations**: D3.js-powered zoom, pan, and path animations
+- **💬 Witty Commentary**: Fast-paced, pun-filled narration (Bill Wurtz vibes)
+- **📱 Mobile-First Design**: Collapsible info panel, optimized touch targets, responsive layout
+- **⚡ Instant Results**: Cached suggestions for popular dishes (no LLM wait time)
+- **🎨 Minimalist Aesthetic**: IBM Plex Mono font, Hermès orange accents, clean UI
+
+---
+
+## 🚀 Quick Start
 
 ### Prerequisites
 
 - Node.js 18+ and npm
-- A Gemini API key ([Get one here](https://makersuite.google.com/app/apikey))
+- A Gemini API key ([Get one here](https://aistudio.google.com/app/apikey))
 
-### Installation
+### Local Development
 
-1. Clone or download this repository
-2. Install dependencies:
+1. **Clone the repository**
+   ```bash
+   git clone <your-repo-url>
+   cd spice-routes
+   ```
+
+2. **Install dependencies**
    ```bash
    npm install
    ```
 
-3. Start the development server:
+3. **Set up environment variables**
+   ```bash
+   cp env.example .env
+   # Edit .env and add your GEMINI_API_KEY
+   ```
+
+4. **Start the backend** (Terminal 1)
+   ```bash
+   npm run dev:api
+   # or: vercel dev
+   ```
+
+5. **Start the frontend** (Terminal 2)
    ```bash
    npm run dev
    ```
 
-4. Open your browser to `http://localhost:3000`
+6. **Open your browser**
+   ```
+   http://localhost:5173
+   ```
 
-5. Enter your Gemini API key in the input field (it stays in your browser, never sent anywhere else)
+> 💡 **Tip**: You need both terminals running! The backend handles API calls, the frontend serves the UI.
 
-## Usage
+### Production Deployment
 
-1. Enter your **Gemini API key** in the top input field
-2. Type a dish name (e.g., "Hyderabadi Biryani", "Masala Dosa", "Filter Coffee")
-3. Click **"Cook the Story"** or use one of the sample dish buttons
-4. Watch as ingredients animate from their source states to the dish's origin
-5. Use the controls to play, pause, replay, or skip to the final view
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed Vercel deployment instructions.
 
-## Tech Stack
+---
 
-- **Vanilla TypeScript** - No framework, just clean TS
-- **D3.js** - For SVG rendering, projections, and animations
-- **TopoJSON** - India state-level map data
-- **Vite** - Development server and build tool
-- **Gemini Flash API** - For ingredient inference
+## 🛠️ Tech Stack
 
-## Project Structure
+- **Frontend**: Vanilla TypeScript + Vite
+- **Visualization**: D3.js (SVG rendering, geo projections, animations)
+- **Map Data**: TopoJSON (India state & district boundaries)
+- **Backend**: Vercel Serverless Functions
+- **AI**: Google Gemini 2.5 Flash API
+- **Styling**: Pure CSS (mobile-first, responsive)
+
+---
+
+## 📁 Project Structure
 
 ```
 spice-routes/
+├── api/                    # Vercel serverless functions
+│   ├── dish.ts            # Main dish analysis endpoint
+│   ├── suggestions.ts     # Cached suggestions endpoint
+│   └── seed-cache.json    # Pre-computed popular dishes
 ├── src/
-│   ├── main.ts          # App bootstrap and event handling
-│   ├── domain.ts        # TypeScript types
-│   ├── map.ts           # Map loading and state utilities
-│   ├── ai.ts            # Gemini API integration
-│   ├── animation.ts     # D3.js animation engine
-│   ├── commentary.ts    # Commentary generation
-│   └── styles.css       # Styling
+│   ├── main.ts            # App entry point & UI logic
+│   ├── animation.ts       # D3.js animation engine
+│   ├── map.ts             # Map utilities & district resolution
+│   ├── api-client.ts      # Frontend API client
+│   ├── domain.ts          # TypeScript interfaces
+│   └── styles.css         # Styling (mobile-first)
 ├── public/
-│   └── india.json       # TopoJSON India map (state-level)
-├── index.html
-├── package.json
-└── tsconfig.json
+│   ├── india.json         # TopoJSON India map data
+│   └── state2district_list.json  # District mapping data
+└── media/
+    └── cover_img.png      # Project cover image
 ```
 
-## API Key Security
+---
 
-**Important**: This app makes API calls directly from the browser. Your API key is:
-- Stored only in browser memory (not persisted)
-- Never sent to any server except Google's Gemini API
-- Suitable for personal/demo use only
+## 🔒 Security
 
-**Do not deploy this publicly with an exposed API key.** For production, you'd need a backend proxy.
+**Your API key is secure!** 
 
-## Limitations
+- ✅ Stored server-side only (Vercel environment variables)
+- ✅ Never exposed to the frontend
+- ✅ Only used in serverless functions
+- ✅ Not visible in browser network requests
 
-- **State-level only**: Visualizations are at state granularity (not districts)
+The frontend makes requests to `/api/dish`, which then securely calls Gemini API on the server. Your key never leaves Vercel's infrastructure.
+
+---
+
+## 🎨 Design Philosophy
+
+**Minimalist. Functional. Fun.**
+
+- **Typography**: IBM Plex Mono (monospace, developer-friendly)
+- **Color Palette**: Hermès orange accents on cream/beige backgrounds
+- **Layout**: Mobile-first, collapsible panels, touch-optimized
+- **Animation**: Smooth, purposeful, not distracting
+
+Inspired by the clean, terminal-like aesthetic of modern developer tools, but with a playful twist.
+
+---
+
+## 📚 Documentation
+
+- **[DEPLOYMENT.md](./DEPLOYMENT.md)** - Deploy to Vercel
+- **[LOCAL_SETUP.md](./LOCAL_SETUP.md)** - Detailed local development guide
+- **[BACKEND_SETUP.md](./BACKEND_SETUP.md)** - Backend architecture overview
+- **[CACHE_AND_DISTRICTS.md](./CACHE_AND_DISTRICTS.md)** - Caching & district resolution
+- **[QUICK_START.md](./QUICK_START.md)** - Quick troubleshooting guide
+
+---
+
+## 🎯 How It Works
+
+1. **User enters dish name** → Frontend sends to `/api/dish`
+2. **Backend checks cache** → Returns instantly if cached
+3. **If not cached** → Calls Gemini API (2-stage process):
+   - Stage 1: Identify ingredients & origins
+   - Stage 2: Resolve exact districts from place names
+4. **Backend caches result** → Saves to JSON file for future requests
+5. **Frontend receives data** → Renders map, animates paths, shows commentary
+6. **Suggestions update** → New dish appears in carousel
+
+---
+
+## 🐛 Known Limitations
+
 - **Approximate accuracy**: Ingredient origins are AI-inferred, not historically rigorous
-- **No backend**: All processing happens in the browser
+- **District resolution**: Some place names may not resolve to exact districts
+- **Cache persistence**: Vercel `/tmp` is ephemeral (cache resets on deployment)
 - **No user accounts**: Stateless, single-session use
 
-## Development
+---
 
-```bash
-# Development server
-npm run dev
+## 🤝 Contributing
 
-# Build for production
-npm run build
+Found a bug? Have an idea? Feel free to:
+- Open an issue
+- Submit a PR
+- Share feedback
 
-# Preview production build
-npm run preview
-```
+This is a fun project—contributions welcome! 🎉
 
-## License
+---
 
-MIT - Feel free to use and modify as needed.
+## 📄 License
 
-## Credits
+MIT License - Use it, modify it, make it your own.
 
-- India map data: [udit-001/india-maps-data](https://github.com/udit-001/india-maps-data)
-- Inspired by etymology visualization apps
+---
+
+## Credits & Acknowledgments
+
+### Map Data
+- **India TopoJSON**: [udit-001/india-maps-data](https://github.com/udit-001/india-maps-data)
+  - State and district boundaries
+  - Geographic coordinate data
+
+### Design Inspiration
+- **Visual Aesthetic**: Inspired by [@vamsibatchuk's wanderword app](https://x.com/vamsibatchuk/status/2013028659938947184)
+
+
+### Code Generation
+- **Built with**: [Cursor](https://cursor.sh) + an ensemble of LLMs
+  - Pair programming with AI assistants
+  - Iterative refinement and debugging
+  - *Yes, the robots helped write this. They're pretty good at it.*
+
+### AI & APIs
+- **Gemini 2.5 Flash**: Google's Gemini API for ingredient analysis
+- **D3.js**: Mike Bostock's incredible visualization library
+
+---
+
+## 💭 The Story Behind SPICE.ROUTES
+
+Every dish tells a story. A story of geography, culture, trade routes, and migration. SPICE.ROUTES makes that story visible.
+
+What started as a weekend project to visualize ingredient origins became a journey through Indian geography, food culture, and the art of storytelling through code.
+
+*Because sometimes, the best way to understand a place is through its food.*
+
+---
+
+**Made with 🍛 and ❤️**
+
+*"How did half of India end up in this one plate?"* — Now you know.
