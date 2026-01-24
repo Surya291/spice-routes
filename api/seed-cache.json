@@ -1,136 +1,7 @@
 {
-  "filter coffee": {
-    "data": {
-      "dish": "filter coffee",
-      "originCity": "Chennai",
-      "originState": "Tamil Nadu",
-      "originStateId": "Tamil Nadu",
-      "ingredients": [
-        {
-          "ingredientName": "Coffee Beans (Arabica/Robusta)",
-          "stateName": "Karnataka",
-          "stateId": "Karnataka",
-          "placeLabel": "Chikmagalur",
-          "districtName": "Chikkamagaluru",
-          "note": "Beans! Ground them up, feel the buzz.",
-          "confidence": 0.8
-        },
-        {
-          "ingredientName": "Chicory Root",
-          "stateName": "Rajasthan",
-          "stateId": "Rajasthan",
-          "placeLabel": "Jodhpur",
-          "districtName": "Jodhpur",
-          "note": "Not coffee, but wants to be! Imposter.",
-          "confidence": 0.8
-        },
-        {
-          "ingredientName": "Water",
-          "stateName": "Tamil Nadu",
-          "stateId": "Tamil Nadu",
-          "placeLabel": "Chennai",
-          "districtName": "Chennai",
-          "note": "Just add water. It's the universe!",
-          "confidence": 0.8
-        },
-        {
-          "ingredientName": "Milk (full-fat)",
-          "stateName": "Tamil Nadu",
-          "stateId": "Tamil Nadu",
-          "placeLabel": "Erode",
-          "districtName": "Erode",
-          "note": "White stuff, makes it creamy. Moooo.",
-          "confidence": 0.8
-        },
-        {
-          "ingredientName": "Sugar (refined white)",
-          "stateName": "Uttar Pradesh",
-          "stateId": "Uttar Pradesh",
-          "placeLabel": "Muzaffarnagar",
-          "districtName": "Muzaffarnagar",
-          "note": "Sweetness! Your brain craves this part.",
-          "confidence": 0.8
-        }
-      ]
-    },
-    "timestamp": 1769005841630
-  },
-  "mutton biriyani": {
-    "data": {
-      "dish": "MUTTON BIRIYANI",
-      "originCity": "Hyderabad",
-      "originState": "Telangana",
-      "originStateId": "Telangana",
-      "ingredients": [
-        {
-          "ingredientName": "Mutton",
-          "stateName": "Rajasthan",
-          "stateId": "Rajasthan",
-          "placeLabel": "Marwari Region",
-          "districtName": "Jodhpur",
-          "note": "It's a sheep. Now it's biryani.",
-          "confidence": 0.8
-        },
-        {
-          "ingredientName": "Basmati Rice",
-          "stateName": "Uttarakhand",
-          "stateId": "Uttarakhand",
-          "placeLabel": "Dehradun",
-          "districtName": "Dehradun",
-          "note": "Long grain, like tiny white rockets.",
-          "confidence": 0.8
-        },
-        {
-          "ingredientName": "Saffron",
-          "stateName": "Jammu & Kashmir",
-          "stateId": "Jammu & Kashmir",
-          "placeLabel": "Pampore",
-          "note": "Tiny flower stamens, super expensive.",
-          "confidence": 0.8
-        },
-        {
-          "ingredientName": "Green Cardamom",
-          "stateName": "Kerala",
-          "stateId": "Kerala",
-          "placeLabel": "Idukki",
-          "districtName": "Idukki",
-          "note": "Little green pods, tiny flavor bombs.",
-          "confidence": 0.8
-        },
-        {
-          "ingredientName": "Ghee",
-          "stateName": "Gujarat",
-          "stateId": "Gujarat",
-          "placeLabel": "Anand",
-          "districtName": "Anand",
-          "note": "Clarified butter, golden goodness.",
-          "confidence": 0.8
-        },
-        {
-          "ingredientName": "Green Chillies",
-          "stateName": "Andhra Pradesh",
-          "stateId": "Andhra Pradesh",
-          "placeLabel": "Guntur",
-          "districtName": "Guntur",
-          "note": "Spicy heat, now with more zing.",
-          "confidence": 0.8
-        },
-        {
-          "ingredientName": "Onions",
-          "stateName": "Maharashtra",
-          "stateId": "Maharashtra",
-          "placeLabel": "Nashik",
-          "districtName": "Nashik",
-          "note": "Layers of flavor, makes you weep.",
-          "confidence": 0.8
-        }
-      ]
-    },
-    "timestamp": 1769006728130
-  },
   "bisi bele bath": {
     "data": {
-      "dish": "BISI BELE BATH",
+      "dish": "bisi bele bath",
       "originCity": "Mysuru",
       "originState": "Karnataka",
       "originStateId": "Karnataka",
@@ -141,16 +12,16 @@
           "stateId": "Karnataka",
           "placeLabel": "Mandya",
           "districtName": "Mandya",
-          "note": "It's a grain! We eat it, obviously.",
+          "note": "Grain power! Many tiny grains.",
           "confidence": 0.8
         },
         {
-          "ingredientName": "Toor Dal (Pigeon Pea)",
+          "ingredientName": "Toor Dal",
           "stateName": "Karnataka",
           "stateId": "Karnataka",
-          "placeLabel": "Kalaburagi (Gulbarga)",
+          "placeLabel": "Kalaburagi",
           "districtName": "Kalaburagi",
-          "note": "Lentils! For texture and, well, more.",
+          "note": "Oh, look! It's protein time.",
           "confidence": 0.8
         },
         {
@@ -159,99 +30,146 @@
           "stateId": "Karnataka",
           "placeLabel": "Kolar",
           "districtName": "Kolar",
-          "note": "Tangy pod. Make it sour, really.",
+          "note": "Pucker up, it's a sour world.",
           "confidence": 0.8
         },
         {
-          "ingredientName": "Red Chillies (Dried)",
+          "ingredientName": "Guntur Chillies",
           "stateName": "Andhra Pradesh",
           "stateId": "Andhra Pradesh",
           "placeLabel": "Guntur",
           "districtName": "Guntur",
-          "note": "Fire bits! Taste the heat, wow.",
+          "note": "Fire! A little bit of fire.",
           "confidence": 0.8
         },
         {
-          "ingredientName": "Ghee (Clarified Butter)",
-          "stateName": "Karnataka",
-          "stateId": "Karnataka",
-          "placeLabel": "Local Dairies",
-          "districtName": "Belagavi",
-          "note": "Golden fat. Makes everything luxurious.",
+          "ingredientName": "Jaggery",
+          "stateName": "Maharashtra",
+          "stateId": "Maharashtra",
+          "placeLabel": "Kolhapur",
+          "districtName": "Kolhapur",
+          "note": "Brown sugar, but make it more.",
           "confidence": 0.8
         },
         {
-          "ingredientName": "Curry Leaves",
+          "ingredientName": "Ghee",
           "stateName": "Karnataka",
           "stateId": "Karnataka",
-          "placeLabel": "Mysore Region",
-          "districtName": "Mysuru",
-          "note": "Tiny green leaves, big aroma surprise.",
+          "placeLabel": "Davangere",
+          "districtName": "Davanagere",
+          "note": "Clarified butter, golden goodness, yum.",
           "confidence": 0.8
         },
         {
-          "ingredientName": "Cashew Nuts",
-          "stateName": "Karnataka",
-          "stateId": "Karnataka",
-          "placeLabel": "Mangaluru",
-          "districtName": "Dakshina Kannada",
-          "note": "Nutty crunch, for extra fancy.",
+          "ingredientName": "Coriander Seeds",
+          "stateName": "Rajasthan",
+          "stateId": "Rajasthan",
+          "placeLabel": "Kota",
+          "districtName": "Kota",
+          "note": "Round seeds, secret flavor unlocked.",
           "confidence": 0.8
         }
       ]
     },
-    "timestamp": 1769006879377
+    "timestamp": 1769249772770
   },
-  "panner butter masala": {
+  "filter coffee": {
     "data": {
-      "dish": "panner butter masala",
-      "originCity": "Delhi",
-      "originState": "Delhi",
-      "originStateId": "Delhi",
+      "dish": "filter coffee",
+      "originCity": "Chennai",
+      "originState": "Tamil Nadu",
+      "originStateId": "Tamil Nadu",
       "ingredients": [
         {
-          "ingredientName": "Paneer",
-          "stateName": "Punjab",
-          "stateId": "Punjab",
-          "placeLabel": "Ludhiana",
-          "districtName": "Ludhiana",
-          "note": "Milk, then squish it! It's like cheese now.",
+          "ingredientName": "Arabica Coffee Beans",
+          "stateName": "Karnataka",
+          "stateId": "Karnataka",
+          "placeLabel": "Chikmagalur",
+          "districtName": "Chikkamagaluru",
+          "note": "Fancy beans, very chill, tastes great.",
           "confidence": 0.8
         },
         {
-          "ingredientName": "Butter",
+          "ingredientName": "Robusta Coffee Beans",
+          "stateName": "Karnataka",
+          "stateId": "Karnataka",
+          "placeLabel": "Coorg",
+          "districtName": "Kodagu",
+          "note": "Stronger kick, wakes up your soul.",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Chicory Root",
           "stateName": "Gujarat",
           "stateId": "Gujarat",
           "placeLabel": "Anand",
           "districtName": "Anand",
-          "note": "Cows made milk. Milk made this. Whoa!",
+          "note": "Adds body, makes it less coffee.",
           "confidence": 0.8
         },
         {
-          "ingredientName": "Tomatoes",
-          "stateName": "Karnataka",
-          "stateId": "Karnataka",
-          "placeLabel": "Kolar",
-          "districtName": "Kolar",
-          "note": "Red, round, puree. Gravy starts here!",
+          "ingredientName": "Full Cream Milk",
+          "stateName": "Tamil Nadu",
+          "stateId": "Tamil Nadu",
+          "placeLabel": "Erode",
+          "districtName": "Erode",
+          "note": "Creamy goodness, makes everything better.",
           "confidence": 0.8
         },
         {
-          "ingredientName": "Cashews",
-          "stateName": "Goa",
-          "stateId": "Goa",
-          "placeLabel": "Ponda",
-          "districtName": "South Goa",
-          "note": "Creamy nut, thicken that sauce. Boom!",
+          "ingredientName": "Cane Sugar",
+          "stateName": "Uttar Pradesh",
+          "stateId": "Uttar Pradesh",
+          "placeLabel": "Meerut",
+          "districtName": "Meerut",
+          "note": "Sweetness explosion, just a little bit.",
+          "confidence": 0.8
+        }
+      ]
+    },
+    "timestamp": 1769249827121
+  },
+  "chicken dum biryani": {
+    "data": {
+      "dish": "Chicken Dum Biryani",
+      "originCity": "Hyderabad",
+      "originState": "Telangana",
+      "originStateId": "Telangana",
+      "ingredients": [
+        {
+          "ingredientName": "Chicken",
+          "stateName": "Telangana",
+          "stateId": "Telangana",
+          "placeLabel": "Local farms, Hyderabad",
+          "districtName": "Hyderabad",
+          "note": "Worms to wings, then biryani brings!",
           "confidence": 0.8
         },
         {
-          "ingredientName": "Kasoori Methi (Dried Fenugreek Leaves)",
-          "stateName": "Rajasthan",
-          "stateId": "Rajasthan",
-          "placeLabel": "Nagaur",
-          "districtName": "Nagaur",
-          "note": "Dried green stuff. Tastes like heaven!",
+          "ingredientName": "Basmati Rice",
+          "stateName": "Uttarakhand",
+          "stateId": "Uttarakhand",
+          "placeLabel": "Dehradun",
+          "districtName": "Dehradun",
+          "note": "Long grains, great gains, taste the plains.",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Saffron",
+          "stateName": "Jammu and Kashmir",
+          "stateId": "Jammu and Kashmir",
+          "placeLabel": "Pampore",
+          "districtName": "Pulwama",
+          "note": "Tiny threads, expensive beds, now food!",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Ghee",
+          "stateName": "Uttar Pradesh",
+          "stateId": "Uttar Pradesh",
+          "placeLabel": "Mathura",
+          "districtName": "Mathura",
+          "note": "Liquid gold, ancient story told.",
           "confidence": 0.8
         },
         {
@@ -260,7 +178,7 @@
           "stateId": "Andhra Pradesh",
           "placeLabel": "Guntur",
           "districtName": "Guntur",
-          "note": "Spice! From a red planet maybe?",
+          "note": "Red hot, that's what we got.",
           "confidence": 0.8
         },
         {
@@ -269,45 +187,586 @@
           "stateId": "Kerala",
           "placeLabel": "Idukki",
           "districtName": "Idukki",
-          "note": "Tiny pod, big aroma. Green gold!",
+          "note": "Little pods, flavor gods, it's real!",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Mint",
+          "stateName": "Karnataka",
+          "stateId": "Karnataka",
+          "placeLabel": "Bengaluru",
+          "districtName": "Bengaluru Urban",
+          "note": "Green garnish, flavor vanish, just kidding!",
           "confidence": 0.8
         }
       ]
     },
-    "timestamp": 1769008076249
+    "timestamp": 1769249881168
   },
-  "galauti kabab": {
+  "vada pav": {
     "data": {
-      "dish": "galauti kabab",
+      "dish": "VADA PAV",
+      "originCity": "Mumbai",
+      "originState": "Maharashtra",
+      "originStateId": "Maharashtra",
+      "ingredients": [
+        {
+          "ingredientName": "Potatoes",
+          "stateName": "Uttar Pradesh",
+          "stateId": "Uttar Pradesh",
+          "placeLabel": "Agra",
+          "districtName": "Agra",
+          "note": "Starchy blobs, then *boil* them!",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Besan (Gram Flour)",
+          "stateName": "Madhya Pradesh",
+          "stateId": "Madhya Pradesh",
+          "placeLabel": "Malwa region",
+          "districtName": "Ujjain",
+          "note": "Chickpeas, but then... *powder!* Poof.",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Green Chillies",
+          "stateName": "Maharashtra",
+          "stateId": "Maharashtra",
+          "placeLabel": "Nashik region",
+          "districtName": "Nashik",
+          "note": "Tiny green fire, now for your tongue.",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Garlic",
+          "stateName": "Madhya Pradesh",
+          "stateId": "Madhya Pradesh",
+          "placeLabel": "Mandsaur",
+          "districtName": "Mandsaur",
+          "note": "Pungent little bulbs, aroma surprise!",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Coriander Leaves",
+          "stateName": "Rajasthan",
+          "stateId": "Rajasthan",
+          "placeLabel": "Kota",
+          "districtName": "Kota",
+          "note": "Fresh green confetti, sprinkle it everywhere.",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Pav (Bread Roll)",
+          "stateName": "Punjab",
+          "stateId": "Punjab",
+          "placeLabel": "Local Mumbai Bakeries (Wheat from Punjab)",
+          "districtName": "Ludhiana",
+          "note": "Soft bread hug, now squish it.",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Mustard Seeds",
+          "stateName": "Rajasthan",
+          "stateId": "Rajasthan",
+          "placeLabel": "Bharatpur",
+          "districtName": "Bharatpur",
+          "note": "Pop goes the flavour! Tiny explosions.",
+          "confidence": 0.8
+        }
+      ]
+    },
+    "timestamp": 1769249963933
+  },
+  "chole bhature": {
+    "data": {
+      "dish": "CHOLE BHATURE",
+      "originCity": "Delhi",
+      "originState": "Delhi",
+      "originStateId": "Delhi",
+      "ingredients": [
+        {
+          "ingredientName": "Chickpeas (Chole)",
+          "stateName": "Madhya Pradesh",
+          "stateId": "Madhya Pradesh",
+          "placeLabel": "Malwa Region",
+          "districtName": "Ujjain",
+          "note": "Round bois, soak 'em overnight, why not?",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Maida (Refined Flour)",
+          "stateName": "Uttar Pradesh",
+          "stateId": "Uttar Pradesh",
+          "placeLabel": "Western UP",
+          "districtName": "Hapur",
+          "note": "Wheat got a glow-up, now it's fancy.",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Red Chilli Powder",
+          "stateName": "Andhra Pradesh",
+          "stateId": "Andhra Pradesh",
+          "placeLabel": "Guntur",
+          "districtName": "Guntur",
+          "note": "Spice level: make your face sweat.",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Onions",
+          "stateName": "Maharashtra",
+          "stateId": "Maharashtra",
+          "placeLabel": "Nashik",
+          "districtName": "Nashik",
+          "note": "Tears of joy, or just onions, who knows?",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Tomatoes",
+          "stateName": "Karnataka",
+          "stateId": "Karnataka",
+          "placeLabel": "Kolar",
+          "districtName": "Kolar",
+          "note": "Little red bombs of tangy goodness.",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Ghee (Clarified Butter)",
+          "stateName": "Gujarat",
+          "stateId": "Gujarat",
+          "placeLabel": "Anand",
+          "districtName": "Anand",
+          "note": "Cow milk magic, now it's butterier!",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Garam Masala (Spice Blend)",
+          "stateName": "Kerala",
+          "stateId": "Kerala",
+          "placeLabel": "Malabar Coast",
+          "districtName": "Kozhikode",
+          "note": "A symphony of flavors, POW! Yeah!",
+          "confidence": 0.8
+        }
+      ]
+    },
+    "timestamp": 1769250131654
+  },
+  "panner butter masala": {
+    "data": {
+      "dish": "panner butter masala",
+      "originCity": "New Delhi",
+      "originState": "Delhi",
+      "originStateId": "Delhi",
+      "ingredients": [
+        {
+          "ingredientName": "Paneer",
+          "stateName": "Punjab",
+          "stateId": "Punjab",
+          "placeLabel": "Amritsar",
+          "districtName": "Amritsar",
+          "note": "Milk curdles, becomes this, wow!",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Tomatoes",
+          "stateName": "Karnataka",
+          "stateId": "Karnataka",
+          "placeLabel": "Kolar",
+          "districtName": "Kolar",
+          "note": "Red, round, make a saucy base.",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Cashews",
+          "stateName": "Kerala",
+          "stateId": "Kerala",
+          "placeLabel": "Kollam",
+          "districtName": "Kollam",
+          "note": "Nutty smooth, thickens everything. Oops!",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Butter",
+          "stateName": "Gujarat",
+          "stateId": "Gujarat",
+          "placeLabel": "Anand",
+          "districtName": "Anand",
+          "note": "Golden churned joy, oh so much!",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Kashmiri Red Chillies",
+          "stateName": "Jammu & Kashmir",
+          "stateId": "Jammu & Kashmir",
+          "placeLabel": "Kashmir Valley",
+          "note": "Color explosion, without the fire.",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Fresh Cream",
+          "stateName": "Uttar Pradesh",
+          "stateId": "Uttar Pradesh",
+          "placeLabel": "Mathura",
+          "districtName": "Mathura",
+          "note": "Swirl it in, pure decadence!",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Kasuri Methi (Dried Fenugreek Leaves)",
+          "stateName": "Rajasthan",
+          "stateId": "Rajasthan",
+          "placeLabel": "Nagaur",
+          "districtName": "Nagaur",
+          "note": "Earthy fragrance, a secret weapon.",
+          "confidence": 0.8
+        }
+      ]
+    },
+    "timestamp": 1769250171199
+  },
+  "jalebi": {
+    "data": {
+      "dish": "JALEBI",
+      "originCity": "Varanasi",
+      "originState": "Uttar Pradesh",
+      "originStateId": "Uttar Pradesh",
+      "ingredients": [
+        {
+          "ingredientName": "Maida (All-purpose flour)",
+          "stateName": "Uttar Pradesh",
+          "stateId": "Uttar Pradesh",
+          "placeLabel": "Doab region",
+          "districtName": "Ghaziabad",
+          "note": "Wheat. It's fine. Go get it.",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Sugar",
+          "stateName": "Uttar Pradesh",
+          "stateId": "Uttar Pradesh",
+          "placeLabel": "Western UP",
+          "districtName": "Muzaffarnagar",
+          "note": "Sweet stuff! More sweet stuff, please.",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Saffron",
+          "stateName": "Jammu and Kashmir",
+          "stateId": "Jammu and Kashmir",
+          "placeLabel": "Pampore",
+          "districtName": "Pulwama",
+          "note": "Yellow gold, very expensive. Wow.",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Cardamom",
+          "stateName": "Kerala",
+          "stateId": "Kerala",
+          "placeLabel": "Idukki district",
+          "districtName": "Idukki",
+          "note": "Tiny green pods, big flavor. POW!",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Ghee (Clarified butter)",
+          "stateName": "Gujarat",
+          "stateId": "Gujarat",
+          "placeLabel": "Anand district",
+          "districtName": "Anand",
+          "note": "Butter, but... *more* butter. Yes.",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Yogurt (Curd)",
+          "stateName": "Rajasthan",
+          "stateId": "Rajasthan",
+          "placeLabel": "Pushkar",
+          "districtName": "Ajmer",
+          "note": "Bacterial magic, for tangy goodness.",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Vegetable Oil",
+          "stateName": "Maharashtra",
+          "stateId": "Maharashtra",
+          "placeLabel": "Vidarbha region",
+          "districtName": "Nagpur",
+          "note": "Frying things makes them crispy. Mmm.",
+          "confidence": 0.8
+        }
+      ]
+    },
+    "timestamp": 1769250227701
+  },
+  "galouti kebab": {
+    "data": {
+      "dish": "Galouti Kebab",
       "originCity": "Lucknow",
       "originState": "Uttar Pradesh",
       "originStateId": "Uttar Pradesh",
       "ingredients": [
         {
-          "ingredientName": "Mutton (finely minced)",
+          "ingredientName": "Minced Mutton (Keema)",
+          "stateName": "Rajasthan",
+          "stateId": "Rajasthan",
+          "placeLabel": "Marwar",
+          "districtName": "Jodhpur",
+          "note": "Meat! It's what's for dinner, forever.",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Raw Papaya Paste",
           "stateName": "Uttar Pradesh",
           "stateId": "Uttar Pradesh",
-          "placeLabel": "Local farms",
+          "placeLabel": "Lucknow",
           "districtName": "Lucknow",
-          "note": "So tender, it just *poofs*.",
+          "note": "Softens things up, like magic!",
           "confidence": 0.8
         },
         {
-          "ingredientName": "Raw Papaya",
+          "ingredientName": "Ghee",
+          "stateName": "Uttar Pradesh",
+          "stateId": "Uttar Pradesh",
+          "placeLabel": "Mathura",
+          "districtName": "Mathura",
+          "note": "Makes everything buttery, smooth, rich.",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Kashmiri Red Chillies (Degi Mirch)",
+          "stateName": "Jammu & Kashmir",
+          "stateId": "Jammu & Kashmir",
+          "placeLabel": "Kashmir Valley",
+          "note": "Red color, mild spice. Beautiful!",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Saffron (Kesar)",
+          "stateName": "Jammu & Kashmir",
+          "stateId": "Jammu & Kashmir",
+          "placeLabel": "Pampore",
+          "note": "Expensive flower bits, very yellow.",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Rose Water",
+          "stateName": "Uttar Pradesh",
+          "stateId": "Uttar Pradesh",
+          "placeLabel": "Kannauj",
+          "districtName": "Kannauj",
+          "note": "Floral mist, very fancy, yes.",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Khus Ki Jadd (Vetiver Root)",
+          "stateName": "Uttar Pradesh",
+          "stateId": "Uttar Pradesh",
+          "placeLabel": "Kannauj",
+          "districtName": "Kannauj",
+          "note": "Earth's secret smell. Wow, deep.",
+          "confidence": 0.8
+        }
+      ]
+    },
+    "timestamp": 1769250322283
+  },
+  "bhel puri": {
+    "data": {
+      "dish": "bhel puri",
+      "originCity": "Mumbai",
+      "originState": "Maharashtra",
+      "originStateId": "Maharashtra",
+      "ingredients": [
+        {
+          "ingredientName": "Puffed Rice (Murmura)",
+          "stateName": "West Bengal",
+          "stateId": "West Bengal",
+          "placeLabel": "Bardhaman",
+          "districtName": "Purba Bardhaman",
+          "note": "Rice puffed up! Now it's important.",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Sev",
+          "stateName": "Madhya Pradesh",
+          "stateId": "Madhya Pradesh",
+          "placeLabel": "Indore",
+          "districtName": "Indore",
+          "note": "Gram flour, fried, really thin. Wow.",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Tamarind",
+          "stateName": "Tamil Nadu",
+          "stateId": "Tamil Nadu",
+          "placeLabel": "Pudukkottai",
+          "districtName": "Pudukkottai",
+          "note": "Tangy fruit, gives the sweet vibe.",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Mint",
+          "stateName": "Uttar Pradesh",
+          "stateId": "Uttar Pradesh",
+          "placeLabel": "Lucknow",
+          "districtName": "Lucknow",
+          "note": "Green leaves, makes it zingy!",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Potatoes",
+          "stateName": "Uttar Pradesh",
+          "stateId": "Uttar Pradesh",
+          "placeLabel": "Agra Region",
+          "districtName": "Agra",
+          "note": "Starchy goodness, cube it, good.",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Onions",
+          "stateName": "Maharashtra",
+          "stateId": "Maharashtra",
+          "placeLabel": "Nashik",
+          "districtName": "Nashik",
+          "note": "Cry a little, then enjoy it.",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Coriander Leaves",
+          "stateName": "Rajasthan",
+          "stateId": "Rajasthan",
+          "placeLabel": "Kota Region",
+          "districtName": "Kota",
+          "note": "Green sprinkles, makes it fancy.",
+          "confidence": 0.8
+        }
+      ]
+    },
+    "timestamp": 1769250392254
+  },
+  "pootharekulu": {
+    "data": {
+      "dish": "pootharekulu",
+      "originCity": "Atreyapuram",
+      "originState": "Andhra Pradesh",
+      "originStateId": "Andhra Pradesh",
+      "ingredients": [
+        {
+          "ingredientName": "Rice Flour",
           "stateName": "Andhra Pradesh",
           "stateId": "Andhra Pradesh",
-          "placeLabel": "Rayalaseema region",
-          "districtName": "Kurnool",
-          "note": "Fruit power! Makes things melt.",
+          "placeLabel": "Godavari Delta",
+          "districtName": "East Godavari",
+          "note": "Tiny grains, big dreams, make thin sheets!",
           "confidence": 0.8
         },
         {
-          "ingredientName": "Green Cardamom",
+          "ingredientName": "Ghee",
+          "stateName": "Gujarat",
+          "stateId": "Gujarat",
+          "placeLabel": "Anand",
+          "districtName": "Anand",
+          "note": "Butter said 'Bye!', became liquid gold.",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Powdered Sugar",
+          "stateName": "Uttar Pradesh",
+          "stateId": "Uttar Pradesh",
+          "placeLabel": "Meerut",
+          "districtName": "Meerut",
+          "note": "Sweet dust, makes everything sparkly.",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Cardamom",
           "stateName": "Kerala",
           "stateId": "Kerala",
-          "placeLabel": "Idukki district",
+          "placeLabel": "Idukki",
           "districtName": "Idukki",
-          "note": "Tiny green pods. Big spicy dreams.",
+          "note": "Green pods, spicy whispers, oh nice!",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Cashew Nuts",
+          "stateName": "Goa",
+          "stateId": "Goa",
+          "placeLabel": "Ponda",
+          "districtName": "South Goa",
+          "note": "Curvy crunch, brain food, maybe?",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Almonds",
+          "stateName": "Jammu & Kashmir",
+          "stateId": "Jammu & Kashmir",
+          "placeLabel": "Kashmir Valley",
+          "note": "Brown oval, protein punch, good stuff.",
+          "confidence": 0.8
+        }
+      ]
+    },
+    "timestamp": 1769250476816
+  },
+  "gulab jamun": {
+    "data": {
+      "dish": "gulab jamun",
+      "originCity": "Lucknow",
+      "originState": "Uttar Pradesh",
+      "originStateId": "Uttar Pradesh",
+      "ingredients": [
+        {
+          "ingredientName": "Khoa (reduced milk solids)",
+          "stateName": "Punjab",
+          "stateId": "Punjab",
+          "placeLabel": "Amritsar",
+          "districtName": "Amritsar",
+          "note": "Milk, condensed. Now you make it sphere.",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Sugar",
+          "stateName": "Uttar Pradesh",
+          "stateId": "Uttar Pradesh",
+          "placeLabel": "Meerut",
+          "districtName": "Meerut",
+          "note": "Sweetness everywhere, taste the future.",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Maida (all-purpose flour)",
+          "stateName": "Uttar Pradesh",
+          "stateId": "Uttar Pradesh",
+          "placeLabel": "Kanpur",
+          "districtName": "Kanpur Nagar",
+          "note": "Flour! It holds the universe.",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Cardamom",
+          "stateName": "Kerala",
+          "stateId": "Kerala",
+          "placeLabel": "Idukki",
+          "districtName": "Idukki",
+          "note": "Tiny green pods, big flavor.",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Rose Water",
+          "stateName": "Uttar Pradesh",
+          "stateId": "Uttar Pradesh",
+          "placeLabel": "Kannauj",
+          "districtName": "Kannauj",
+          "note": "A flower bath for your dessert.",
+          "confidence": 0.8
+        },
+        {
+          "ingredientName": "Ghee",
+          "stateName": "Haryana",
+          "stateId": "Haryana",
+          "placeLabel": "Karnal",
+          "districtName": "Karnal",
+          "note": "Golden fat, makes everything better.",
           "confidence": 0.8
         },
         {
@@ -315,28 +774,11 @@
           "stateName": "Jammu & Kashmir",
           "stateId": "Jammu & Kashmir",
           "placeLabel": "Pampore",
-          "note": "Precious threads. King's colors, kinda.",
-          "confidence": 0.8
-        },
-        {
-          "ingredientName": "Ghee",
-          "stateName": "Punjab",
-          "stateId": "Punjab",
-          "placeLabel": "Malwa region",
-          "districtName": "Ludhiana",
-          "note": "Butter, but better. Golden, liquid.",
-          "confidence": 0.8
-        },
-        {
-          "ingredientName": "Kashmiri Red Chili Powder",
-          "stateName": "Jammu & Kashmir",
-          "stateId": "Jammu & Kashmir",
-          "placeLabel": "Srinagar",
-          "note": "Red, but gentle. For good vibes.",
+          "note": "Fancy red lines, now you're rich.",
           "confidence": 0.8
         }
       ]
     },
-    "timestamp": 1769008152498
+    "timestamp": 1769250819252
   }
 }

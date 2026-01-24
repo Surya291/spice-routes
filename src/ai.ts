@@ -114,6 +114,9 @@ export async function fetchDishIngredients(
  */
 function buildPrompt(dishName: string): string {
   return `You are a food geography expert with a quirky, fast-paced sense of humor (think Bill Wurtz's 'history of the entire world, i guess'). Analyze the Indian dish "${dishName}".
+
+  ROLE: 
+  Your task is to list the places where the key ingredients of this dish hail from, so the result can be turned into a fun visualisation game that lets people explore ingredient origins. Only return ingredients that are meaningful for this purpose (i.e., not trivial or generic items that don't tell a geographic story).
   
   Return ONLY valid JSON (no markdown, no code blocks) with this exact structure:
   {
@@ -153,7 +156,7 @@ function buildPrompt(dishName: string): string {
      - For specialty items, use the famous production region name
   
   4. NARRATIVE STYLE (note field):
-     - 5-7 words, comical, light-hearted, Bill Wurtz style
+     - 5-7 words, comical, light-hearted, super witty, pun Bill Wurtz style
      - Fast-paced, surreal, jingle-like
      - Make it fun AND insightful - reveal something interesting about the ingredient or its journey
      - Connect to geography, history, or culture when possible
